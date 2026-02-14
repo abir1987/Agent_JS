@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Universal AI Chat</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <link rel="stylesheet" href="./app.css?v=1" />
+</head>
+
+<body class="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+  <div id="loading" class="min-h-screen flex items-center justify-center">
+    <div class="text-center">
+      <div class="mx-auto h-10 w-10 rounded-full border-4 border-zinc-200 border-t-zinc-900 dark:border-zinc-800 dark:border-t-zinc-100 animate-spin"></div>
+      <div class="mt-3 font-semibold">Loading App...</div>
+      <div id="loadNote" class="mt-1 text-sm text-zinc-500">Waiting for app.js</div>
+    </div>
+  </div>
+
+  <div id="app" class="min-h-screen hidden">
+    <div class="p-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+      <div>
+        <div class="font-semibold">Universal Chat</div>
+        <div class="text-xs text-zinc-500">OpenRouter • Streaming</div>
+      </div>
+      <button id="openSettings" class="px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800">⚙ Settings</button>
+    </div>
+
+    <div id="messages" class="p-4 space-y-3"></div>
+
+    <div class="sticky bottom-0 p-3 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-950/90">
+      <div class="flex gap-2">
+        <textarea id="prompt" class="flex-1 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900"
+          rows="1" placeholder="Type message..."></textarea>
+        <button id="send" class="px-4 py-2 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-semibold">Send</button>
+      </div>
+      <div id="status" class="mt-2 text-xs text-zinc-500"></div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="fixed inset-0 hidden">
+    <div class="absolute inset-0 backdrop"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="w-full max-w-lg rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+        <div class="p-4 border-b border-zinc-200 dark:border-zinc-800 flex justify-between">
+          <div class="font-semibold">Settings</div>
+          <button id="closeSettings" class="px-3 py-1 rounded-lg">✕</button>
+        </div>
+        <div class="p-4 space-y-3">
+          <div>
+            <label class="text-sm font-semibold">OpenRouter API Key</label>
+            <input id="apiKey" type="password" class="mt-1 w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950" placeholder="sk-or-..." />
+          </div>
+          <div>
+            <label class="text-sm font-semibold">Model</label>
+            <input id="model" class="mt-1 w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950" value="deepseek/deepseek-r1:free" />
+          </div>
+          <div class="flex gap-2">
+            <button id="saveSettings" class="flex-1 px-3 py-2 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-semibold">Save</button>
+            <button id="toggleDark" class="px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800">🌙</button>
+          </div>
+          <div class="text-xs text-zinc-500">If loader stuck: open /health.html to see errors.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUST be last -->
+  <script src="./app.js?v=1"></script>
+</body>
+</html>
