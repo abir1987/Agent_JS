@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Health Check</title>
+  <style>
+    body{font-family:Arial; padding:20px}
+    .ok{color:green} .bad{color:red}
+    pre{background:#f4f4f4; padding:10px; border-radius:8px; overflow:auto}
+  </style>
+</head>
+<body>
+  <h2>✅ Health Check</h2>
+  <div id="status">Loading…</div>
+  <pre id="log"></pre>
+
+  <script>
+    (function(){
+      const log = (m)=>{ document.getElementById('log').textContent += m + "\n"; console.log(m); };
+      window.addEventListener("error",(e)=>log("❌ error: "+(e.message||e)));
+      window.addEventListener("unhandledrejection",(e)=>log("❌ rejection: "+(e.reason?.message||e.reason||e)));
+
+      log("JS running ✅");
+      log("Location: " + location.href);
+
+      // CDN test (Tailwind)
+      const s = document.createElement("script");
+      s.src = "https://cdn.tailwindcss.com";
+      s.onload = ()=>log("Tailwind CDN ✅ loaded");
+      s.onerror = ()=>log("Tailwind CDN ❌ blocked/failed");
+      document.body.appendChild(s);
+
+      document.getElementById("status").innerHTML = "<b class='ok'>If you can see this, JS is working ✅</b>";
+    })();
+  </script>
+</body>
+</html>
